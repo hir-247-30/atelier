@@ -12,6 +12,31 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  search:
+    image: elasticsearch:7.17.6
+    volumes:
+      - wikijsindex:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+      nproc: 4096
+    ports:
+      - 9200:9200
+    command:
+      - /bin/sh
+      - -c
+      - "./bin/elasticsearch-plugin list | grep -q analysis-kuromoji || ./bin/elasticsearch-plugin install analysis-kuromoji;
+        ./bin/elasticsearch-plugin list | grep -q analysis-icu|| ./bin/elasticsearch-plugin install analysis-icu;
+        /usr/local/bin/docker-entrypoint.sh"
+    restart: unless-stopped
+
   wikijs:
     image: ghcr.io/requarks/wiki:2
     restart: unless-stopped
@@ -32,3 +57,4 @@ services:
 volumes:
   mysql-data:
   wikijs-data:
+  wikijsindex:
