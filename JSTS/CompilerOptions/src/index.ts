@@ -60,7 +60,7 @@ example4.call(null, 200);
 example4.apply(null, 300);
 
 // ---------------------------------------------------
-// ５ strictPropertyInitialization
+// 5 strictPropertyInitialization
 // クラス内で初期化されていないプロパティを禁止
 // ---------------------------------------------------
 
@@ -68,9 +68,9 @@ example4.apply(null, 300);
 // Property 'property2' has no initializer and is not definitely assigned in the constructor.
 // Property 'property3' has no initializer and is not definitely assigned in the constructor.
 class example5_FAIL {
-    property1: string
-    property2: string
-    property3: string
+    property1: string;
+    property2: string;
+    property3: string;
 
     constructor () { }
 }
@@ -78,8 +78,8 @@ class example5_FAIL {
 // OK
 class example5_SUCCESS {
     property1: string = 'OK';
-    property2: string
-    property3: string|undefined
+    property2: string;
+    property3: string|undefined;
 
     constructor () {
         this.property2 = 'OK';
@@ -121,20 +121,20 @@ const exmaple7 = {
 
 // 'this' implicitly has type 'any' because it does not have a type annotation.
 function exmaple7_FAIL () {
-    console.log(`${this.name}`)
+    console.log(`${this.name}`);
 }
 
 type example7 = {
-    name: string
+    name: string;
 }
 
 // 引数でthisの型を明示してあげればOK
 function exmaple7_SUCCESS (this: example7): void {
-    console.log(`${this.name}`)
+    console.log(`${this.name}`);
 }
 
 // ---------------------------------------------------
-// ８ useUnknownInCatchVariables
+// 8 useUnknownInCatchVariables
 // try catch での例外補足時、catch節に渡る値をunknown型にする
 // ---------------------------------------------------
 
@@ -203,8 +203,8 @@ function example11_SUCCESS (args1: string, _args2: string, args3: string): void 
 // ---------------------------------------------------
 
 type example12 = {
-    property1: string
-    property2?: string
+    property1: string;
+    property2?: string;
 }
 
 // Type '{ property1: string; property2: undefined; }' is not assignable to type 'example12' with ...
