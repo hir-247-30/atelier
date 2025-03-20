@@ -36,7 +36,7 @@ example3 = function (value: number): void {
     console.log(value.toFixed());
 };
 
-// 以下が実行されるとランタイムエラーを発生させてしまう
+// 上記の場合、以下が実行されるとランタイムエラーを発生させてしまう
 example3('文字列');
 
 // 共変（型を広くする）はOK
@@ -152,4 +152,218 @@ try {
     if (typeof example8_SUCCESS === 'string') {
         console.log(example8_SUCCESS.toUpperCase())
     }
+}
+
+// ---------------------------------------------------
+// 9 alwaysStrict
+// グローバルにstrictモードを有効にする
+// ---------------------------------------------------
+
+// 例えば var let const なしでの暗黙的なグローバル変数の作成をエラーにする
+// Cannot find name 'example9_FAIL'. Did you mean 'example1_FAIL'?
+example9_FAIL = undefined;
+
+// OK
+const example9_SUCCESS = undefined;
+
+// ---------------------------------------------------
+// 10 noUnusedLocals
+// 未使用のローカル変数をエラーにする
+// ---------------------------------------------------
+
+function example10_FAIL (): void {
+    // 'unused' is declared but its value is never read.
+    const unused = 'unused';
+    console.log('unused');
+}
+
+function example10_SUCCESS (): void {
+    console.log('OK');
+}
+
+// ---------------------------------------------------
+// 11 noUnusedParameters
+// 未使用の引数を禁止
+// ---------------------------------------------------
+
+// 'args2' is declared but its value is never read.
+function example11_FAIL (args1: string, args2: string, args3: string): void {
+    console.log(`${args1} ${args3}`);
+}
+
+// 使わないものは _ を先頭につけて表現すればOK
+// ただ eslint ではエラー出ちゃうので注意
+function example11_SUCCESS (args1: string, _args2: string, args3: string): void {
+    console.log(`${args1} ${args3}`);
+}
+
+// ---------------------------------------------------
+// 12 exactOptionalPropertyTypes
+// オプショナルプロパティに明示的にundefinedを突っ込むのを禁止
+// ---------------------------------------------------
+
+type example12 = {
+    property1: string
+    property2?: string
+}
+
+// Type '{ property1: string; property2: undefined; }' is not assignable to type 'example12' with ...
+const example12_FAIL: example12 = {
+    property1: 'OK',
+    property2: undefined
+}
+
+// OK
+const example12_OK: example12 = {
+    property1: 'OK'
+}
+
+// ---------------------------------------------------
+// 13 noImplicitReturns
+// 戻り値の型を厳密に評価する
+// ---------------------------------------------------
+
+// Function lacks ending return statement and return type does not include 'undefined'.
+function example13_FAIL (args1: number): string {
+    if (args1 > 0) {
+        return 'OK';
+    }
+}
+
+// OK
+function example13_SUCCESS (args1: number): string {
+    if (args1 > 0) {
+        return 'OK';
+    }
+    return '';
+}
+
+// ---------------------------------------------------
+// 14 noFallthroughCasesInSwitch
+// switch文でbreak, returnが適切に使用されているか調べる
+// ---------------------------------------------------
+
+function example14_FAIL (args1: number): void {
+    switch (args1) {
+        case 1: // Fallthrough case in switch.
+            console.log(args1);
+        case 2: // Fallthrough case in switch.
+            console.log(args1);
+        case 3: // Fallthrough case in switch.
+            console.log(args1);
+        default:
+            console.log(args1);
+    }
+}
+
+// OK
+function example14_SUCCESS (args1: number): void {
+    switch (args1) {
+        case 1:
+            console.log(args1);
+            break;
+        case 2:
+            console.log(args1);
+            break;
+        case 3:
+            console.log(args1);
+            return;
+        default:
+            console.log(args1);
+    }
+}
+
+// ---------------------------------------------------
+// 15 noUncheckedIndexedAccess
+// 配列アクセス時の型はundefinedとのユニオン型とする
+// ---------------------------------------------------
+
+const example15: number[] = [1, 2, 3];
+
+// Type 'number | undefined' is not assignable to type 'number'.
+// Type 'undefined' is not assignable to type 'number'.
+const example15_FAIL: number = example15[1];
+// Object is possibly 'undefined'.
+example15[1] += 1;
+
+const example15_SUCCESS: number = example15[1] ?? 0;
+example15[1] = example15[1] ?? 0 + 1;
+
+// ---------------------------------------------------
+// 16 noImplicitOverride
+// オーバライドの明示的な宣言を強制する
+// ---------------------------------------------------
+
+class Example15_Parent {
+    public example15_FAIL (): void {
+        console.log('parent');
+    }
+
+    public example15_SUCCESS (): void {
+        console.log('parent');
+    }
+}
+
+class Example15_Child extends Example15_Parent {
+    // This member must have an 'override' modifier because it overrides a member in the base class 'Example15_Parent'.
+    public example15_FAIL (): void {
+        console.log('child');
+    }
+
+    // OK
+    public override example15_SUCCESS (): void {
+        console.log('child');
+    }
+}
+
+// ---------------------------------------------------
+// 17 noPropertyAccessFromIndexSignature
+// オブジェクトのプロパティが存在するか不明瞭な場合、プロパティアクセスをインデックス記法に強制する
+// ---------------------------------------------------
+
+type Example17 = {
+    [key: string]: string;
+  };
+
+const example17: Example17 = {
+    FAIL: 'NG',
+    SUCCESS: 'OK',
+}
+
+// Property 'FAIL' comes from an index signature, so it must be accessed with ['FAIL'].
+console.log(example17.FAIL);
+
+console.log(example17['SUCCESS']);
+
+// ---------------------------------------------------
+// 18 allowUnusedLabels
+// falseにしないと起動しない
+// 使用されていないラベルにエラーを出すか
+// ---------------------------------------------------
+
+example18_SUCCESS: for (let i = 0; i < 5; i++) {
+    if (i === 1) {
+        continue example18_SUCCESS;
+    }
+    if (i === 2) {
+        // Unused label.
+        example18_FAIL: true;
+    }
+    console.log(i);
+}
+
+// ---------------------------------------------------
+// 19 allowUnreachableCode
+// falseにしないと起動しない
+// 未到達コードにエラーを出す
+// ---------------------------------------------------
+
+function example19 (args1: number): number {
+    if (args1 > 0) {
+        return args1 + 1;
+    } else {
+        return args1 + 2;
+    }
+    // Unreachable code detected.
+    return args1 + 3;
 }
