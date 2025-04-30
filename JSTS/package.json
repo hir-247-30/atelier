@@ -4,8 +4,8 @@
   "description": "ts atelier",
   "main": "index.js",
   "scripts": {
-    "resulttype": "tsx ResultType/index.ts",
-    "debug": "tsx Debug/index.ts"
+    "resulttype": "tsx src/ResultType/index.ts",
+    "debug": "tsx src/Debug/index.ts"
   },
   "author": "hir-247-30",
   "license": "ISC",

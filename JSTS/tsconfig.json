@@ -17,7 +17,6 @@
       "allowUnreachableCode": false,
     },
     "include": [
-      "./ResultType/index.ts",
-      "./Debug/index.ts"
-    ],
+      "src/**/*ts"
+    ]
   }

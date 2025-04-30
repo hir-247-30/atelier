@@ -6,7 +6,7 @@
       {
         "type": "node", // pwa-nodeにするとWSLではWindows側のnodeを参照してしまう
         "request": "launch",
-        "name": "debug tsx exexute",
+        "name": "debug tsx execute",
         "runtimeExecutable": "npm",
         "runtimeArgs": [
           "run",
