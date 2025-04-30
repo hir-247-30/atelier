@@ -1,0 +1,22 @@
+// ルートリポジトリ直下に .vscode/launch.json が来るようにエディタを開くこと
+// また、WSLのターミナル上で code . 経由でエディタを開くこと
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node", // pwa-nodeにするとWSLではWindows側のnodeを参照してしまう
+        "request": "launch",
+        "name": "debug tsx exexute",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run",
+          "debug"
+        ],
+        "cwd": "${workspaceFolder}",
+        "skipFiles": ["<node_internals>/**"],
+        "smartStep": true,
+        "sourceMaps": true
+      }
+    ]
+  }
+  

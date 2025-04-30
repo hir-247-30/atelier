@@ -16,5 +16,8 @@
       "allowUnusedLabels": false,
       "allowUnreachableCode": false,
     },
-    "include": ["./ResultType/src/**/*.ts"],
+    "include": [
+      "./ResultType/index.ts",
+      "./Debug/index.ts"
+    ],
   }
