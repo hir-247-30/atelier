@@ -6,7 +6,8 @@
   "scripts": {
     "resulttype": "tsx src/ResultType/index.ts",
     "debug": "tsx src/Debug/index.ts",
-    "cluster": "tsx src/Parallel/Cluster/index.ts"
+    "cluster": "tsx src/Parallel/Cluster/index.ts",
+    "workerthreads": "tsx src/Parallel/WorkerThreads/index.ts"
   },
   "author": "hir-247-30",
   "license": "ISC",
