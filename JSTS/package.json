@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "resulttype": "tsx src/ResultType/index.ts",
-    "debug": "tsx src/Debug/index.ts"
+    "debug": "tsx src/Debug/index.ts",
+    "cluster": "tsx src/Parallel/Cluster/index.ts"
   },
   "author": "hir-247-30",
   "license": "ISC",
@@ -15,6 +16,8 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@hono/node-server": "^1.14.1",
+    "hono": "^4.7.8",
     "neverthrow": "^8.2.0",
     "tsx": "^4.19.3"
   }
