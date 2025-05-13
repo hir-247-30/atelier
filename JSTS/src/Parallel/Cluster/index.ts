@@ -8,7 +8,7 @@ const BASE_PORT = 3000;
 
 if (cluster.isPrimary) {  
     // ワーカープロセスを生成
-    for (var i = 0; i < CPU_CORE_NUMS; i++) {
+    for (let i = 0; i < CPU_CORE_NUMS; i++) {
         // ポートの競合を避けるため、ポート番号をインクリメントして子プロセスに渡す
         const workerPort = BASE_PORT + i;
         cluster.fork({ WORKER_PORT: workerPort.toString() });
