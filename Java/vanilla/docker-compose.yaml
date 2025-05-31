@@ -1,0 +1,8 @@
+services:
+  java:
+    build: ./docker
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - ./server/src:/usr/src:cached
