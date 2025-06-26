@@ -1,21 +1,32 @@
 package com.example.pro.repository;
 
-import com.example.pro.entity.Training;
+import com.example.pro.entity.TrainingEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO ちゃんとDBから取る
+@Repository
 public class JdbcTrainingRepository implements TrainingRepository {
+
     @Override
-    public List<Training> selectAll() {
-        System.out.println("データベースからデータを取得します");
+    public TrainingEntity select(String id) {
+        TrainingEntity trainingEntity = new TrainingEntity();
+        trainingEntity.setTitle("タイトル" + id);
+
+        return trainingEntity;
+    }
+
+    @Override
+    public List<TrainingEntity> selectAll() {
         // データベースから取得している想定
-        List<Training> trainings = new ArrayList<>();
+        List<TrainingEntity> trainingEntities = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            Training training = new Training();
-            training.setTitle("title_" + i);
-            trainings.add(training);
+            TrainingEntity trainingEntity = new TrainingEntity();
+            trainingEntity.setTitle("タイトル" + i);
+            trainingEntities.add(trainingEntity);
         }
-        return trainings;
+        return trainingEntities;
     }
 }

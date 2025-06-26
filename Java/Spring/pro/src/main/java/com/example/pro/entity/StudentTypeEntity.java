@@ -3,7 +3,7 @@ package com.example.pro.entity;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class StudentType implements Serializable {
+public class StudentTypeEntity implements Serializable {
     private String id;
     private String code;
     private String name;

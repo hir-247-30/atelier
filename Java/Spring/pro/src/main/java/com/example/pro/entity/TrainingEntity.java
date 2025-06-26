@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class Training implements Serializable {
+public class TrainingEntity implements Serializable {
     private String id;
     private String title;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private Integer reserved;
     private Integer capacity;
-    private List<Reservation> reservations;
+    private List<ReservationEntity> reservationEntities;
 
     public String getId() {
         return id;
@@ -63,11 +63,11 @@ public class Training implements Serializable {
         this.capacity = capacity;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public List<ReservationEntity> getReservations() {
+        return reservationEntities;
     }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setReservations(List<ReservationEntity> reservationEntities) {
+        this.reservationEntities = reservationEntities;
     }
 }

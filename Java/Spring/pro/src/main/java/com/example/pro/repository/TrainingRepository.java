@@ -1,9 +1,10 @@
 package com.example.pro.repository;
 
-import com.example.pro.entity.Training;
+import com.example.pro.entity.TrainingEntity;
 
 import java.util.List;
 
 public interface TrainingRepository {
-    List<Training> selectAll();
+    TrainingEntity select(String id);
+    List<TrainingEntity> selectAll();
 }

@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
-public class Reservation implements Serializable {
+public class ReservationEntity implements Serializable {
     private String id;
     private String trainingId;
-    private Training training;
+    private TrainingEntity trainingEntity;
     private String studentTypeId;
-    private StudentType studentType;
+    private StudentTypeEntity studentType;
     private LocalDateTime reservedDateTime;
     private String name;
     private String phone;
@@ -40,19 +40,19 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public Training getTraining() {
-        return training;
+    public TrainingEntity getTraining() {
+        return trainingEntity;
     }
 
-    public void setTraining(Training training) {
-        this.training = training;
+    public void setTraining(TrainingEntity trainingEntity) {
+        this.trainingEntity = trainingEntity;
     }
 
-    public StudentType getStudentType() {
+    public StudentTypeEntity getStudentType() {
         return studentType;
     }
 
-    public void setStudentType(StudentType studentType) {
+    public void setStudentType(StudentTypeEntity studentType) {
         this.studentType = studentType;
     }
 
