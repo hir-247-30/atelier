@@ -25,4 +25,18 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingRepository.selectAll();
     }
 
+    @Override
+    public String create() {
+        return trainingRepository.create();
+    }
+
+    @Override
+    public void update(String id) {
+        trainingRepository.update(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        trainingRepository.delete(id);
+    }
 }

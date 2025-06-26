@@ -29,4 +29,17 @@ public class JdbcTrainingRepository implements TrainingRepository {
         }
         return trainingEntities;
     }
+
+    @Override
+    public String create() {
+        return "";
+    }
+
+    @Override
+    public void update(String id) {
+    }
+
+    @Override
+    public void delete(String id) {
+    }
 }

@@ -2,9 +2,8 @@ package com.example.pro.controller;
 
 import com.example.pro.entity.TrainingEntity;
 import com.example.pro.service.TrainingService;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +29,23 @@ public class TrainingController {
     @GetMapping("/trainings")
     public List<TrainingEntity> getTrainings() {
         return this.trainingService.findAll();
+    }
+
+    @PostMapping("/training")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String createTraining() {
+        return this.trainingService.create();
+    }
+
+    @PutMapping("/training/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateTraining(@PathVariable String id) {
+        this.trainingService.update(id);
+    }
+
+    @DeleteMapping("/training/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTraining(@PathVariable String id) {
+        this.trainingService.delete(id);
     }
 }
