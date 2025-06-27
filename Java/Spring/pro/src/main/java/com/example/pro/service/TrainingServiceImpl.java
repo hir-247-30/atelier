@@ -5,6 +5,7 @@ import com.example.pro.repository.TrainingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrainingServiceImpl implements TrainingService {
@@ -16,7 +17,7 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public TrainingEntity findById(String id) {
+    public Optional<TrainingEntity> findById(String id) {
         return trainingRepository.select(id);
     }
 

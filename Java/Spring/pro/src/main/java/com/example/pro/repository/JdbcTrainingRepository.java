@@ -1,33 +1,37 @@
 package com.example.pro.repository;
 
 import com.example.pro.entity.TrainingEntity;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 // TODO ちゃんとDBから取る
 @Repository
 public class JdbcTrainingRepository implements TrainingRepository {
 
-    @Override
-    public TrainingEntity select(String id) {
-        TrainingEntity trainingEntity = new TrainingEntity();
-        trainingEntity.setTitle("タイトル" + id);
+    private final JdbcTemplate jdbcTemplate;
 
-        return trainingEntity;
+    public JdbcTrainingRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Optional<TrainingEntity> select(String id) {
+        String query = "SELECT * FROM t_training WHERE id = ?";
+        List<TrainingEntity> result = jdbcTemplate.query(query, new DataClassRowMapper<>(TrainingEntity.class), id);
+
+        return result.stream().findFirst();
     }
 
     @Override
     public List<TrainingEntity> selectAll() {
-        // データベースから取得している想定
-        List<TrainingEntity> trainingEntities = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            TrainingEntity trainingEntity = new TrainingEntity();
-            trainingEntity.setTitle("タイトル" + i);
-            trainingEntities.add(trainingEntity);
-        }
-        return trainingEntities;
+        String query = "SELECT * FROM t_training";
+
+        return jdbcTemplate.query(query, new DataClassRowMapper<>(TrainingEntity.class));
     }
 
     @Override

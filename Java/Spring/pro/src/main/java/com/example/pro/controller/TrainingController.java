@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TrainingController {
@@ -22,7 +23,7 @@ public class TrainingController {
     }
 
     @GetMapping("/training/{id}")
-    public TrainingEntity getTraining(@PathVariable String id) {
+    public Optional<TrainingEntity> getTraining(@PathVariable String id) {
         return this.trainingService.findById(id);
     }
 
