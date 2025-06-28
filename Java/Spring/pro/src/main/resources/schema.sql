@@ -1,7 +1,3 @@
-DROP TABLE IF EXISTS t_training;
-DROP TABLE IF EXISTS t_reservation;
-DROP TABLE IF EXISTS t_student_type;
-
 CREATE TABLE IF NOT EXISTS t_training (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(256),
