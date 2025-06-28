@@ -1,6 +1,7 @@
 package com.example.pro.service;
 
 import com.example.pro.entity.TrainingEntity;
+import com.example.pro.input.TrainingInput;
 import com.example.pro.repository.TrainingRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,8 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public String create() {
-        return trainingRepository.create();
+    public Optional<TrainingEntity> create(TrainingInput trainingInput) {
+        return trainingRepository.create(trainingInput);
     }
 
     @Override

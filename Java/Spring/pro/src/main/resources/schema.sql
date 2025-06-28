@@ -1,5 +1,9 @@
+DROP TABLE IF EXISTS t_training;
+DROP TABLE IF EXISTS t_reservation;
+DROP TABLE IF EXISTS t_student_type;
+
 CREATE TABLE IF NOT EXISTS t_training (
-    id VARCHAR(8) PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(256),
     start_date_time TIMESTAMP,
     end_date_time TIMESTAMP,
@@ -8,9 +12,9 @@ CREATE TABLE IF NOT EXISTS t_training (
 );
 
 CREATE TABLE IF NOT EXISTS t_reservation (
-    id VARCHAR(8) PRIMARY KEY,
-    training_id VARCHAR(8),
-    student_type_id VARCHAR(4),
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    training_id BIGINT,
+    student_type_id BIGINT,
     start_date_time TIMESTAMP,
     reserved_date_time TIMESTAMP,
     name VARCHAR(256),
@@ -19,7 +23,7 @@ CREATE TABLE IF NOT EXISTS t_reservation (
 );
 
 CREATE TABLE IF NOT EXISTS t_student_type (
-    id VARCHAR(8) PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(8),
     name VARCHAR(256)
 );

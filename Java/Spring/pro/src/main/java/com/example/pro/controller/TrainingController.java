@@ -1,9 +1,11 @@
 package com.example.pro.controller;
 
 import com.example.pro.entity.TrainingEntity;
+import com.example.pro.input.TrainingInput;
 import com.example.pro.service.TrainingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +36,8 @@ public class TrainingController {
 
     @PostMapping("/training")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createTraining() {
-        return this.trainingService.create();
+    public Optional<TrainingEntity> createTraining(@Valid @RequestBody TrainingInput trainingInput) {
+        return this.trainingService.create(trainingInput);
     }
 
     @PutMapping("/training/{id}")
