@@ -10,19 +10,19 @@ import jakarta.validation.constraints.Min;
 public class TrainingInput implements Serializable {
     private String id;
     
-    @NotBlank(message = "タイトルは必須です")
+    @NotBlank(message = "{NotBlank.TrainingInput.title}")
     private String title;
     
-    @NotNull(message = "開始日時は必須です")
+    @NotNull(message = "{NotNull.TrainingInput.startDateTime}")
     private Date startDateTime;
     
-    @NotNull(message = "終了日時は必須です")
+    @NotNull(message = "{NotNull.TrainingInput.endDateTime}")
     private Date endDateTime;
     
-    @Min(value = 0, message = "予約数は0以上にしてください")
+    @Min(value = 0, message = "{min.TrainingInput.reserved}")
     private int reserved;
 
-    @Min(value = 1, message = "定員は1以上にしてください")
+    @Min(value = 1, message = "{min.TrainingInput.capacity}")
     private int capacity;
 
     public String getId() {
