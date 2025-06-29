@@ -41,9 +41,9 @@ public class TrainingController {
     }
 
     @PutMapping("/training/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTraining(@PathVariable String id) {
-        this.trainingService.update(id);
+    public Optional<TrainingEntity> updateTraining(@PathVariable String id, @Valid @RequestBody TrainingInput trainingInput) {
+        trainingInput.setId(id);
+        return this.trainingService.update(id, trainingInput);
     }
 
     @DeleteMapping("/training/{id}")

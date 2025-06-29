@@ -33,8 +33,8 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public void update(String id) {
-        trainingRepository.update(id);
+    public Optional<TrainingEntity> update(String id, TrainingInput trainingInput) {
+        return trainingRepository.update(id, trainingInput);
     }
 
     @Override

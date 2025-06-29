@@ -62,10 +62,23 @@ public class JdbcTrainingRepository implements TrainingRepository {
     }
 
     @Override
-    public void update(String id) {
+    public Optional<TrainingEntity> update(String id, TrainingInput trainingInput) {
+        String sql = "UPDATE t_training SET title = ?, start_date_time = ?, end_date_time = ?, reserved = ?, capacity = ? WHERE id = ?";
+        int updated = jdbcTemplate.update(sql, trainingInput.getTitle(),
+                new java.sql.Timestamp(trainingInput.getStartDateTime().getTime()),
+                new java.sql.Timestamp(trainingInput.getEndDateTime().getTime()),
+                trainingInput.getReserved(),
+                trainingInput.getCapacity(),
+                id);
+
+        if (updated == 0) return Optional.empty();
+
+        return this.select(id);
     }
 
     @Override
     public void delete(String id) {
+        String sql = "DELETE FROM t_training WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }

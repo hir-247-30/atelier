@@ -9,6 +9,6 @@ public interface TrainingService {
     Optional<TrainingEntity> findById(String id);
     List<TrainingEntity> findAll();
     Optional<TrainingEntity> create(TrainingInput trainingInput);
-    void update(String id);
+    Optional<TrainingEntity> update(String id, TrainingInput trainingInput);
     void delete(String id);
 }

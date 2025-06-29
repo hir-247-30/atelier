@@ -10,6 +10,6 @@ public interface TrainingRepository {
     Optional<TrainingEntity> select(String id);
     List<TrainingEntity> selectAll();
     Optional<TrainingEntity> create(TrainingInput trainingInput);
-    void update(String id);
+    Optional<TrainingEntity> update(String id, TrainingInput trainingInput);
     void delete(String id);
 }
