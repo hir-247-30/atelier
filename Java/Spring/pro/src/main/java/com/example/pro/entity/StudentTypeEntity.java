@@ -2,7 +2,6 @@ package com.example.pro.entity;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class StudentTypeEntity implements Serializable {
     private String id;
     private String code;

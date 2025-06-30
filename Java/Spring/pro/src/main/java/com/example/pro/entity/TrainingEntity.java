@@ -1,11 +1,9 @@
 package com.example.pro.entity;
 
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@SuppressWarnings("serial")
 public class TrainingEntity implements Serializable {
     private String id;
     private String title;

@@ -3,7 +3,6 @@ package com.example.pro.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@SuppressWarnings("serial")
 public class ReservationEntity implements Serializable {
     private String id;
     private String trainingId;

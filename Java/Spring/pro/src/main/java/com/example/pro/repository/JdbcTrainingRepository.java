@@ -10,7 +10,6 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +40,9 @@ public class JdbcTrainingRepository implements TrainingRepository {
     @Override
     public Optional<TrainingEntity> create(TrainingInput trainingInput) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        
+
         String sql = "INSERT INTO t_training (title, start_date_time, end_date_time, reserved, capacity) VALUES (?, ?, ?, ?, ?)";
-        
+
         jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, trainingInput.getTitle());
@@ -57,7 +56,7 @@ public class JdbcTrainingRepository implements TrainingRepository {
         Number generatedId = keyHolder.getKey();
 
         if (generatedId == null) return Optional.empty();
-        
+
         return this.select(String.valueOf(generatedId.longValue()));
     }
 

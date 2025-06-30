@@ -6,19 +6,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Min;
 
-@SuppressWarnings("serial")
 public class TrainingInput implements Serializable {
     private String id;
-    
+
     @NotBlank(message = "{NotBlank.TrainingInput.title}")
     private String title;
-    
+
     @NotNull(message = "{NotNull.TrainingInput.startDateTime}")
     private Date startDateTime;
-    
+
     @NotNull(message = "{NotNull.TrainingInput.endDateTime}")
     private Date endDateTime;
-    
+
     @Min(value = 0, message = "{min.TrainingInput.reserved}")
     private int reserved;
 
