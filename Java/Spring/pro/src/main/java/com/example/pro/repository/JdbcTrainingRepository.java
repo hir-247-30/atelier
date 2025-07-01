@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -38,6 +39,7 @@ public class JdbcTrainingRepository implements TrainingRepository {
     }
 
     @Override
+    @Transactional
     public Optional<TrainingEntity> create(TrainingInput trainingInput) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -61,6 +63,7 @@ public class JdbcTrainingRepository implements TrainingRepository {
     }
 
     @Override
+    @Transactional
     public Optional<TrainingEntity> update(String id, TrainingInput trainingInput) {
         String sql = "UPDATE t_training SET title = ?, start_date_time = ?, end_date_time = ?, reserved = ?, capacity = ? WHERE id = ?";
         int updated = jdbcTemplate.update(sql, trainingInput.getTitle(),
@@ -76,6 +79,7 @@ public class JdbcTrainingRepository implements TrainingRepository {
     }
 
     @Override
+    @Transactional
     public void delete(String id) {
         String sql = "DELETE FROM t_training WHERE id = ?";
         jdbcTemplate.update(sql, id);
