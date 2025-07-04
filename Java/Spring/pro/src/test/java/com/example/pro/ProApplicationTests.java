@@ -10,4 +10,9 @@ class ProApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void mainMethodCoverage() {
+		ProApplication.main(new String[]{});
+	}
+
 }

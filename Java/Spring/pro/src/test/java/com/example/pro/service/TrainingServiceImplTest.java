@@ -121,6 +121,8 @@ class TrainingServiceImplTest {
 
     @Test
     void update_CallsRepositoryUpdate() {
+        when(trainingRepository.update("1", sampleInput)).thenReturn(Optional.of(sampleTraining));
+        
         trainingService.update("1", sampleInput);
 
         verify(trainingRepository, times(1)).update("1", sampleInput);
