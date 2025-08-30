@@ -8,6 +8,7 @@
     "debug": "tsx src/Debug/index.ts",
     "cluster": "tsx src/Parallel/Cluster/index.ts",
     "workerthreads": "tsx src/Parallel/WorkerThreads/index.ts",
+    "defer": "tsx src/Defer/index.ts",
     "jest": "jest"
   },
   "author": "hir-247-30",
